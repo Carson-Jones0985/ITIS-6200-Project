@@ -48,10 +48,10 @@ python pdf_attack.py
 ```
 
 This will create two PDFs in the `attack_pdfs/` folder:
-- `attack_visible.pdf` — financial report with a visible injection (50% lower values)
-- `attack_hidden.pdf` — financial report with a hidden white text injection
-- `cannot_help_visible.pdf` — injection that hijacks the LLM to refuse all responses
-- `cannot_help_hidden.pdf` — hidden version of the above
+- `attack_visible_numbers.pdf` — financial report with a visible injection (50% lower values)
+- `attack_hidden_numbers.pdf` — financial report with a hidden white text injection
+- `attack_visible_cannot_help.pdf` — injection that hijacks the LLM to refuse all responses
+- `attack_hidden_cannot_help.pdf` — hidden version of the above
 
 ---
 
