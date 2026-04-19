@@ -1,6 +1,8 @@
 langchain
-langchain-community
-chromadb
+langchain-ollama
+langchain-chroma
+langchain-text-splitters
 pymupdf
 streamlit
+fpdf2
 ollama
