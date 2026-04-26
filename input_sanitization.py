@@ -1,4 +1,5 @@
-INJECTION_PHRASES = ["ignore previous instructions", "ignore all previous", "forget everything", "disregard", "set aside your earlier guidance", "do not follow", "override", "from now on", "pretend you are", "you are now", "act as",]
+INJECTION_PHRASES = ["ignore previous instructions", "ignore all previous", "forget everything", "disregard", "set aside your earlier guidance", "do not follow", "override", "from now on", "pretend you are", 
+                     "you are now", "act as","respond only with","do not reveal","[system]",]
 
 def sanitize_chunks(chunks):
     cleaned = []
