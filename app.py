@@ -49,13 +49,13 @@ if question:
 
     if flagged:
         st.warning(response)
-        st.session_state.log.append(f"🚨 BLOCKED: {response}")
+        st.session_state.log.append(f"BLOCKED: {response}")
     else:
         st.write(response)
-        st.session_state.log.append(f"✅ ALLOWED: {question}")
+        st.session_state.log.append(f"ALLOWED: {question}")
 
     # Defense details expander
-    with st.expander("🔍 Defense Details"):
+    with st.expander(" Defense Details"):
         if enable_sanitization:
             st.subheader("Input Sanitization")
             if details["flagged_chunks"]:
