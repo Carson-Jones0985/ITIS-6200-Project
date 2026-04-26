@@ -44,7 +44,7 @@ python -m streamlit run app.py
 Run this once to generate the attack PDFs used for testing:
 
 ```bash
-python pdf_attack.py
+python generate_attack_pdfs.py
 ```
 
 This will create two PDFs in the `attack_pdfs/` folder:
