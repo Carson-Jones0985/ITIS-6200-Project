@@ -16,7 +16,7 @@ A Retrieval Augmented Generation (RAG) question & answer assistant that demonstr
 
 **1. Clone the repository:**
 ```bash
-git clone <https://github.com/Carson-Jones0985/ITIS-6200-Project.git>
+git clone https://github.com/Carson-Jones0985/ITIS-6200-Project.git
 cd ITIS-6200-Project
 ```
 
