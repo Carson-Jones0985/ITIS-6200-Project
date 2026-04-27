@@ -79,9 +79,9 @@ This will create two PDFs in the `attack_pdfs/` folder:
 3. Ask "What is the net profit?"
 4. The LLM will return $60,000 instead of $120,000 — the attack succeeded
 5. Upload `attack_pdfs/attack_visible_cannot_help.pdf`
-6. Ask any question — the LLM will refuse to respond
+6. Ask any question - the LLM will refuse to respond
 7. Upload `attack_pdfs/visible_around_ifc.pdf`, turn **only sanitization ON**
-8. Ask any question — the rephrased injection evades the sanitizer and succeeds
+8. Ask any question - the rephrased injection evades the sanitizer and succeeds
 
 ## How It Works
 
