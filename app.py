@@ -1,6 +1,8 @@
-import streamlit as st
-import tempfile
 import os
+import tempfile
+
+import streamlit as st
+
 from rag import ingest_pdf, query
 
 if "log" not in st.session_state:
@@ -17,15 +19,19 @@ st.header("1. Upload a Document")
 uploaded_file = st.file_uploader("Choose a PDF", type="pdf")
 
 if uploaded_file:
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-        tmp.write(uploaded_file.read())
-        tmp_path = tmp.name
+    if "last_uploaded" not in st.session_state or st.session_state.last_uploaded != uploaded_file.name:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+            tmp.write(uploaded_file.read())
+            tmp_path = tmp.name
 
-    with st.spinner("Ingesting document..."):
-        count = ingest_pdf(tmp_path)
-    
-    os.unlink(tmp_path)
-    st.success(f"Ingested {count} chunks from {uploaded_file.name}")
+        with st.spinner("Ingesting document..."):
+            count = ingest_pdf(tmp_path)
+
+        os.unlink(tmp_path)
+        st.session_state.last_uploaded = uploaded_file.name
+        st.success(f"Ingested {count} chunks from {uploaded_file.name}")
+    else:
+        st.success(f"Using already ingested: {uploaded_file.name}")
 
 st.header("2. Ask a Question")
 question = st.text_input("Enter your question")
