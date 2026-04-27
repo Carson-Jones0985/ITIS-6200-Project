@@ -55,11 +55,20 @@ def query(question, enable_ifc=True, enable_sanitization=True, enable_output_fil
 
     # IFC checks chunks BEFORE sending to LLM
     if enable_ifc:
+        clean_chunks = []
         for chunk in chunks:
             violated, msg = ifc.check_violation(chunk)
             if violated:
                 details["ifc_violations"].append(msg)
-        print("DEBUG ifc violations:", details["ifc_violations"])
+                clean_lines = []
+                for line in chunk.split("\n"):
+                    line_violated, _ = ifc.check_violation(line)
+                    if not line_violated:
+                        clean_lines.append(line)
+                clean_chunks.append("\n".join(clean_lines))
+            else:
+                clean_chunks.append(chunk)
+        chunks = clean_chunks
 
     print("DEBUG chunks:", chunks)
 
@@ -79,19 +88,21 @@ Answer:"""
     response = llm.invoke(prompt)
 
     if enable_ifc and details["ifc_violations"]:
-        print("DEBUG returning ifc violation")
-        return f"Flow Control Violation Detected: {details['ifc_violations'][0]}", True, details
+        if enable_output_filter:
+            safe_response, warning = filter_output(response)
+            if warning:
+                details["output_warning"] = warning
+                return f"Output filtered: {warning}", True, details
+            return safe_response, False, details
+        return response, False, details
 
     if enable_output_filter:
         safe_response, warning = filter_output(response)
         if warning:
             details["output_warning"] = warning
-            print("DEBUG returning output filter warning")
             return f"Output filtered: {warning}", True, details
-        print("DEBUG details on clean response:", details)
         return safe_response, False, details
-    
-    print("DEBUG details on final return:", details)
 
     return response, False, details
+
 
