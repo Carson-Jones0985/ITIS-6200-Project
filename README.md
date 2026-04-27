@@ -48,10 +48,10 @@ python generate_attack_pdfs.py
 ```
 
 This will create two PDFs in the `attack_pdfs/` folder:
-- `attack_visible_numbers.pdf` — financial report with a visible injection (50% lower values)
-- `attack_hidden_numbers.pdf` — financial report with a hidden white text injection
-- `attack_visible_cannot_help.pdf` — injection that hijacks the LLM to refuse all responses
-- `attack_hidden_cannot_help.pdf` — hidden version of the above
+- `attack_visible_numbers.pdf` - financial report with a visible injection (50% lower values)
+- `attack_hidden_numbers.pdf` - financial report with a hidden white text injection
+- `attack_visible_cannot_help.pdf` - injection that hijacks the LLM to refuse all responses
+- `attack_hidden_cannot_help.pdf` - hidden version of the above
 
 ---
 
@@ -89,7 +89,7 @@ This will create two PDFs in the `attack_pdfs/` folder:
 Malicious PDFs are crafted using `fpdf2` with injection text embedded either as visible plaintext or hidden white text. When ingested, PyMuPDF extracts all text including the hidden injection, which gets stored in ChromaDB and retrieved alongside legitimate content.
 
 ### Information Flow Control (Biba)
-Document chunks are assigned LOW integrity. Before building the LLM prompt, each chunk is scanned for control phrases. Chunks containing injection language are cleaned line-by-line — only the malicious lines are removed, preserving the financial data.
+Document chunks are assigned LOW integrity. Before building the LLM prompt, each chunk is scanned for control phrases. Chunks containing injection language are cleaned line-by-line - only the malicious lines are removed, preserving the financial data.
 
 ### Input Sanitization
 Retrieved chunks are scanned line-by-line against a list of known injection phrases. Flagged lines are stripped before the chunk reaches the LLM, keeping the legitimate content intact.
